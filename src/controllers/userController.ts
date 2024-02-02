@@ -10,4 +10,20 @@ const getAllUsers = async (req: Request, res: Response, next: NextFunction) => {
   }
 }
 
-export { getAllUsers }
+const getUserById = async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    const { id } = req.params
+    const user = await db.users.findUnique({
+      where: {
+        id,
+      },
+    })
+    if (!user) {
+      throw new Error('User not found')
+    }
+  } catch (error) {
+    next(error)
+  }
+}
+
+export { getAllUsers, getUserById }
