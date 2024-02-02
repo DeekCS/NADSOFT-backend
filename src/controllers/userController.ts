@@ -26,4 +26,22 @@ const getUserById = async (req: Request, res: Response, next: NextFunction) => {
   }
 }
 
-export { getAllUsers, getUserById }
+const createUser = async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    const { name, email, country, mobile, age } = req.body
+    const user = await db.users.create({
+      data: {
+        name,
+        age,
+        email,
+        country,
+        mobile,
+      },
+    })
+    res.json(user)
+  } catch (error) {
+    next(error)
+  }
+}
+
+export { getAllUsers, getUserById, createUser }
