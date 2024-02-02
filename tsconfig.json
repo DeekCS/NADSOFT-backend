@@ -2,13 +2,15 @@
   "compilerOptions": {
     "typeRoots": ["./typings", "./node_modules/@types"],
     "target": "ESNext",
+    "types": ["node", "express", "jest"],
     "module": "commonjs",
     "strict": true,
     "esModuleInterop": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
-    "outDir": "./dist" // Change this if you want a different output directory
+    "outDir": "./dist", // Change this if you want a different output directory
   },
+  "moduleResolution": "node",
   "include": ["src/**/*.ts"],
-  "exclude": ["node_modules"]
+  "exclude": ["node_modules"],
 }
