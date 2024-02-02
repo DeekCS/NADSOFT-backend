@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from 'express' // Import Request here
 import db from '../db.server'
-
+import { UserDTO } from '../models/UserDTO'
 const getAllUsers = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const users = await db.users.findMany()
@@ -28,15 +28,9 @@ const getUserById = async (req: Request, res: Response, next: NextFunction) => {
 
 const createUser = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    const { name, email, country, mobile, age } = req.body
+    const userData: UserDTO = req.body
     const user = await db.users.create({
-      data: {
-        name,
-        age,
-        email,
-        country,
-        mobile,
-      },
+      data: userData,
     })
     res.json(user)
   } catch (error) {
