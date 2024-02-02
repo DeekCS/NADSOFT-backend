@@ -38,4 +38,20 @@ const createUser = async (req: Request, res: Response, next: NextFunction) => {
   }
 }
 
-export { getAllUsers, getUserById, createUser }
+const updateUser = async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    const { id } = req.params
+    const userData: UserDTO = req.body
+    const user = await db.users.update({
+      where: {
+        id,
+      },
+      data: userData,
+    })
+    res.json(user)
+  } catch (error) {
+    next(error)
+  }
+}
+
+export { getAllUsers, getUserById, createUser, updateUser }
