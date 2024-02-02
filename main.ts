@@ -1,4 +1,6 @@
 import express from 'express'
+import dotenv from 'dotenv'
+
 import userRoutes from './src/routes/userRoutes'
 import {
   setDefaultStatus,
@@ -6,6 +8,8 @@ import {
 } from './src/middlewares/statusMiddleware'
 
 import { requestLogger } from './src/middlewares/requestLogger'
+
+dotenv.config()
 
 const app = express()
 const PORT = process.env.PORT || 3000
