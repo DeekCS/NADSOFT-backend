@@ -1,20 +1,26 @@
-import db from "./src/db.server";
+import express from 'express'
+import userRoutes from './src/routes/userRoutes'
+import {
+  setDefaultStatus,
+  handleErrors,
+} from './src/middlewares/statusMiddleware'
 
-async function main() {
-  try {
-    const users = await db.users.findMany();
-    console.log(users);
-  } catch (error) {
-    console.error("Error executing query:", error);
-  } finally {
-    await db.$disconnect();
-  }
-}
+const app = express()
+const PORT = process.env.PORT || 3000
 
-main()
-  .then(() => {
-    console.log("Done");
-  })
-  .catch((e) => {
-    console.error("Error:", e);
-  });
+// Middleware to set default status for all responses
+app.use(setDefaultStatus)
+
+// Middleware for parsing JSON requests
+app.use(express.json())
+
+// Mount the user routes under the '/users' path
+app.use('/', userRoutes)
+
+// Handle errors globally
+app.use(handleErrors)
+
+// Start the server
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`)
+})
