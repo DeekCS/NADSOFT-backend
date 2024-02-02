@@ -55,4 +55,27 @@ const updateUser = async (req: Request, res: Response, next: NextFunction) => {
   }
 }
 
-export { getAllUsers, getUserById, createUser, updateUser }
+/**
+ * Deletes a user based on the provided ID.
+ * @param req Express Request object.
+ * @param res Express Response object.
+ * @param next Express NextFunction for passing control to the next middleware.
+ */
+const deleteUser = async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    // Extract user ID from request parameters
+    const { id } = req.params
+
+    // Perform database deletion operation
+    await db.users.delete({
+      where: { id },
+    })
+
+    // Respond with a success status (204 No Content)
+    res.status(204).end()
+  } catch (error) {
+    next(error)
+  }
+}
+
+export { getAllUsers, getUserById, createUser, updateUser, deleteUser }
