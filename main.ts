@@ -5,11 +5,16 @@ import {
   handleErrors,
 } from './src/middlewares/statusMiddleware'
 
+import { requestLogger } from './src/middlewares/requestLogger'
+
 const app = express()
 const PORT = process.env.PORT || 3000
 
 // Middleware to set default status for all responses
 app.use(setDefaultStatus)
+
+// Middleware for logging requests
+app.use(requestLogger)
 
 // Middleware for parsing JSON requests
 app.use(express.json())
