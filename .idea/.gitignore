@@ -1,0 +1,14 @@
+# Default ignored files
+/shelf/
+/workspace.xml
+# Editor-based HTTP Client requests
+/httpRequests/
+
+#handle the .idea  folder and webstorm files
+
+.idea/
+*.iml
+*.iws
+*.ipr
+*.ids
+*.orig
