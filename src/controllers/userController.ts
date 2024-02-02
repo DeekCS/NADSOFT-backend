@@ -21,6 +21,7 @@ const getUserById = async (req: Request, res: Response, next: NextFunction) => {
     if (!user) {
       throw new Error('User not found')
     }
+    res.json(user)
   } catch (error) {
     next(error)
   }
@@ -32,7 +33,7 @@ const createUser = async (req: Request, res: Response, next: NextFunction) => {
     const user = await db.users.create({
       data: userData,
     })
-    res.json(user)
+    res.status(201).json(user)
   } catch (error) {
     next(error)
   }
