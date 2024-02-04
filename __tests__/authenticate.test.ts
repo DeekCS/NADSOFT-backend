@@ -3,10 +3,11 @@ import express, { Request, Response, NextFunction } from 'express'
 
 const app = express()
 
-import authanticate from '../src/middlewares/authenticate'
+import authenticate from '../src/middlewares/authenticate'
+import { describe } from 'node:test'
 
-// Mock route using the authenticate middleware
-app.get('/secure-route', authanticate, (req: Request, res: Response) => {
+// Mock route using the authenticated middleware
+app.get('/secure-route', authenticate, (req: Request, res: Response) => {
   res.json({ message: 'Secure route accessed successfully' })
 })
 
